@@ -1,0 +1,304 @@
+{
+  "name": "Secure Export",
+  "description": "Restricts activities related to exporting data to specific IP address ranges, such as Secure Research Environments (SRE's). Provides several options to specify the types of projects, download activities to be restricted, and project level exceptions.",
+  "documentation": "EM_SecureExport_ReadMe.pdf",
+  "namespace": "JHU\\secureexport",
+  "redcap-version-min": "14.0.2",
+  "authors": [
+    {
+      "name": "Michael Sherman Jr",
+      "email": "mike.sherman@jhmi.edu",
+      "institution": "Johns Hopkins University"
+    },
+    {
+      "name": "Scott Carey",
+      "email": "scarey@jhu.edu",
+      "institution": "Johns Hopkins University"
+    }
+  ],
+  "system-settings": [
+    {
+      "key": "separator-line1-sys",
+      "name": "<hr style='height:5px;border-width:0;color:black;background-color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+      "type": "descriptive"
+    },
+    {
+      "key": "overview1-text",
+      "name": "<b>Overview</b></br>There are several REDCap features that allow for the export of PHI/PII. This module allows REDCap Administrators to define SRE’s (using IP address ranges) and to control which REDCap features are to be restricted to those ranges.</br>When implemented, features related to restricted exports may be disabled on the user interface screens and hover-text (tooltip) information is displayed to the user. Additionally, certain pages display a message box containing more detailed information/instructions. Messaging is configurable within the EM Control Center settings.</br>To accommodate multi-site projects, where restricting “all” export locations is impractical, project level settings can be used to exempt additional IP ranges, Users, and/or DAG’s.</br></br><b>Considerations</b></br><ul><li>It is strongly recommended that changes to project level settings are limited to REDCap Administrators (in the control center module configuration).</li><li>•API Exports are not currently restricted through this module. API usage is best managed through institutional policy. API restrictions are being considered for a future update to this module. If you would like to share your thoughts on this issue, please reach out to Scott Carey (scarey@jhu.edu) and/or Mike Sherman (mike.sherman@jhmi.edu).</li></ul></br><b>Configuration</b></br>The Secure Export module has 7 Control Center EM settings:</br><ul><li>Exclude REDCap Administrators from Secure Export restrictions?</li><li>Approved IP address range(s)</li><li>Project Types to be restricted</li><li>Export Activities to be restricted</li><li>Access Control Group (ACG) exceptions</li><li>Alternate page banner messaging (optional)</li><li>Alternative hover text messaging (optional)</li></ul>",
+      "type": "descriptive"
+    },
+    {
+      "key": "separator-line2-sys",
+      "name": "<hr style='height:5px;border-width:0;color:black;background-color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+      "type": "descriptive"
+    },
+    {
+      "key": "allow-super-users",
+      "name": "<b>Exclude REDCap Administrators from Secure Export restrictions?</b>",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "ip-range-raw",
+      "name": "<b>Secure Research Environment IP Address Range(s):</b></br><ul><li>Enter one IP address or range per line.</li><li><b>Example:</li></b><div style='margin-left: 10px; color: #800000;'><ul><li>192.168.1.0/24</li><li>10.0.0.50 - 10.0.0.150</li><li>172.16.5.10-172.16.5.30</li><li>8.8.8.8</li><li>203.0.113.0/255.255.255.128</li></ul></ul></div>",
+      "type": "textarea"
+    },
+    {
+      "key": "select-proj-types-sys",
+      "name": "<b>Which project types should be restricted to an approved SRE?</b><br></li></ul>Unselected project types will NOT be restricted to SRE's</li></ul>",
+      "type": "descriptive"
+    },
+    {
+      "key": "proj-type-research-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Research",
+      "type": "checkbox"
+    },
+    {
+      "key": "proj-type-qi-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quality Improvement",
+      "type": "checkbox"
+    },
+    {
+      "key": "proj-type-op-support-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operational Support",
+      "type": "checkbox"
+    },
+    {
+      "key": "proj-type-practice-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practice / Just for fun",
+      "type": "checkbox"
+    },
+    {
+      "key": "proj-type-other-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Other",
+      "type": "checkbox"
+    },
+    {
+      "key": "proj-type-none-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Type Not Indicated",
+      "type": "checkbox"
+    },
+    {
+      "key": "sre-select-restricted-features-sys",
+      "name": "<b>Disabled functionality when <u>NOT</u> in an SRE</b> (<b><u>ALL</u></b> are recommended)",
+      "type": "descriptive"
+    },
+    {
+      "key": "report-export-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data/Report Export File: Download/Send-It</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE: Export file creation is permitted (saved to File Repository)",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "file-repo-download-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File Repository Download Options",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "file-repo-share-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File Repository Share Icons",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "pdf-export-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Record/Instrument PDF Download (with data)",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "other-export-tab-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Download Icons on 'Other Export Options' Tab",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "activity-log-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity Log Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "field-comment-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field Comment Log Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "data-quality-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data Quality Results Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "survey-participant-list-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Survey Distribution Participant List Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "survey-invite-log-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Survey Invitation Log Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "alerts-log-export-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alerts & Notifications Log Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "data-resolution-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data Resolution Workflow Issues Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "project-xml-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project XML with Data",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "mobile-app-sys",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile App Data Dump & App Log Exports",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "acg-id-exclusion",
+      "name": "<b><u>OPTIONAL:</u> Exempt Access Control Groups</b> (<u>not</u> restricted to SRE's)<ul><li>Enter one ACG ID per line (e.g., <font color='#800000'>G-7AC10535A0E7B</font>)</li></ul>",
+      "type": "textarea"
+    },
+    {
+      "key": "export_tab_tooltip",
+      "name": "<b><u>OPTIONAL:</u> Alternate hover text message to replace default message.</b></br></br><b>Default Message </b>(if alternate not provided)<b>: </b></br><div style='margin-left: 20px; color: #800000;'>'Disabled. Restricted to Secure Research Environment (SRE) IP address ranges.'</div>",
+      "type": "text"
+    },
+    {
+      "key": "export-page-msg",
+      "name": "<b><u>OPTIONAL:</u> Alternate 'Export Restrictions' banner message</b></br>(on pages displaying export restrictions banner).</br></br><b>Default Message </b>(if alternate not provided)<b>: </b></br><div style='margin-left: 20px; color: #800000;'>'Institutional policies limit data exports/downloads to Secure Research Environments (SRE's). Your current IP address is not within an approved SRE IP range. As a result, export features (exporting data, logs, PDF's with data, etc.) may be disabled for your current session. To export data, you will need to work from within an SRE. For additional information, please reach out to your study team lead or your REDCap Administrator.'</br></br><span style='color:black;'><b>Note: </b>It might also be appropriate to include a link to any institutional policies driving this restriction.</span></div>",
+      "type": "rich-text"
+    }
+  ],
+  "project-settings": [
+    {
+      "key": "ip-range-override",
+      "name": "<b>Approved IP Address Range(s):</b></br><ul><li>Enter one IP address or range per line.</li><li><b>In addition to Control Center SRE settings):</li><li><b>Example:</li></b><div style='margin-left: 10px; color: #800000;'><ul><li>192.168.1.0/24</li><li>10.0.0.50 - 10.0.0.150</li><li>172.16.5.10-172.16.5.30</li><li>8.8.8.8</li><li>203.0.113.0/255.255.255.128</li></ul></ul></div>",
+      "type": "textarea"
+    },
+    {
+      "key": "user-id-exclusion",
+      "name": "<b>Exempt User Names</b> (<u>not</u> restricted to SRE's).<ul><li>Enter one User Name per line.</li><li><b>Example:</b></li><ul><li><font color='#800000'>jdoe1</li><li>ssmith126</font></li></ul></ul>",
+      "type": "textarea"
+    },
+    {
+      "key": "dag-id-exclusion",
+      "name": "Exempt DAG ID's (not restricted).",
+      "name": "<b>Exempt DAG ID's</b> (<u>not</u> restricted to SRE's)<ul><li>Enter one DAG ID per line.</li><li><b>Example:</b></li><ul><li><font color='#800000'>3189</li><li>3573</font></li></ul></ul>",
+      "type": "textarea"
+    },
+    {
+      "key": "doc-id-exclusion",
+      "name": "<b>Exempt Document ID's</b> (<u>not</u> restricted to SRE's)<ul><li>Enter one Document ID per line.</li><li><b>Example:</b></li><ul><li><font color='#800000'>1304186</li><li>1472825</font></li></ul></ul>",
+      "type": "textarea"
+    },
+    {
+      "key": "sre-select-permitted-features-prj",
+      "name": "<b>Export features <u>PERMITTED</u> for this project</b><br> (Overrides Control Center Restrictions)</b>",
+      "type": "descriptive"
+    },
+    {
+      "key": "report-export-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data/Report Export File: Download/Send-It",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "file-repo-download-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File Repository Download Options",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "file-repo-share-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File Repository Share Icons",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "pdf-export-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Record/Instrument PDF Download (with data)",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "other-export-tab-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Download Icons on 'Other Export Options' Tab",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "activity-log-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity Log Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "field-comment-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field Comment Log Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "data-quality-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data Quality Results Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "survey-participant-list-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Survey Distribution Participant List Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "survey-invite-log-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Survey Invitation Log Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "alerts-log-export-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alerts & Notifications Log Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "data-resolution-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data Resolution Workflow Issues Export",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "project-xml-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project XML with Data",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "mobile-app-prj",
+      "name": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile App Data Dump & App Log Exports",
+      "required": false,
+      "type": "checkbox"
+    }
+  ],
+
+
+  "auth-ajax-actions": [
+    "collectClientInfo"
+  ],
+  "framework-version": 16
+}

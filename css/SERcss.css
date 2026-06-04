@@ -1,0 +1,95 @@
+.jhu-disabled-option {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+.jhu-disabled-tab {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+}
+
+.jhu-disabled-link {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
+.jhu-disabled-link {
+    text-decoration: none !important;
+}
+.jhu-disabled-button {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    filter: grayscale(40%) !important;
+    pointer-events: auto !important;
+}
+
+.jhu-disabled-button:hover,
+.jhu-disabled-button:focus,
+.jhu-disabled-button:active {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    filter: grayscale(40%) !important;
+    box-shadow: none !important;
+}
+.jhu-restriction-banner-thin {
+    margin:12px 0;
+    background-color:#fafafa;
+    border:1px solid #ddd;
+    padding:5px 10px;
+    font-size:13px;
+    max-width:800px;
+    border-bottom-left-radius:10px 10px;
+    border-bottom-right-radius:10px 10px;
+    border-top-left-radius:10px 10px;
+    border-top-right-radius:10px 10px;
+}
+.jhu-restriction-banner {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 0 12px 0;
+    box-sizing: border-box;
+}
+.jhu-restriction-banner-repo {
+    max-width: 1000px;
+    margin: 0 0 12px 0;
+    box-sizing: border-box;
+}
+.jhu-restriction-banner-inner {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.jhu-restriction-banner table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.jhu-export-dialog-banner.jhu-restriction-banner {
+    max-width: none;
+}
+
+    .jhu-disabled-export-icon {
+    color: #C00000 !important;
+    font-size: 2em !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
+    margin-right: 6px !important;
+    display: inline-block !important;
+}
+#simple_export a.jhu-disabled-link {
+    display: inline-block !important;
+    text-decoration: none !important;
+}
+
+#simple_export a.jhu-disabled-link:hover,
+#simple_export a.jhu-disabled-link:focus,
+#simple_export a.jhu-disabled-link:active {
+    text-decoration: none !important;
+}
+
+#simple_export .jhu-disabled-export-icon {
+    color: #C00000 !important;
+    font-size: 2em !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
+    display: inline-block !important;
+}
